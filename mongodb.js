@@ -94,27 +94,54 @@ mongoClient.connect(
     //     console.log(users);
     //   });
 
-    db.collection("tasks").findOne(
-      {
-        _id: new objectId("5fe7fd22411b1714ffd2a265"),
-      },
-      (error, tasks) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(tasks);
-        }
-      }
-    );
+    // db.collection("tasks").findOne(
+    //   {
+    //     _id: new objectId("5fe7fd22411b1714ffd2a265"),
+    //   },
+    //   (error, tasks) => {
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log(tasks);
+    //     }
+    //   }
+    // );
+
+    // db.collection("tasks")
+    //   .find({ completed: false })
+    //   .toArray((error, tasks) => {
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log(tasks);
+    //     }
+    //   });
+
+    //update
+    // db.collection("users")
+    //   .updateOne(
+    //     { _id: new objectId("5fe8031865ad1318557dc268") },
+    //     { $inc: { age: 1 } }
+    //   )
+    //   .then((result) => {
+    //     console.log(result.matchedCount);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
     db.collection("tasks")
-      .find({ completed: false })
-      .toArray((error, tasks) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(tasks);
-        }
+      .updateMany(
+        {
+          completed: true,
+        },
+        { $set: { completed: false } }
+      )
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 );
