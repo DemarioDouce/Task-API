@@ -7,9 +7,9 @@ const objectId = mongodb.ObjectID;
 const connectionURL = "mongodb://127.0.0.1:27017";
 const databaseName = "taskApp";
 
-const id = new objectId();
-console.log(id.id);
-console.log(id.getTimestamp());
+// const id = new objectId();
+// console.log(id.id);
+// console.log(id.getTimestamp());
 
 mongoClient.connect(
   connectionURL,
@@ -69,5 +69,52 @@ mongoClient.connect(
     //     console.log(result.ops);
     //   }
     // );
+
+    //fetch data
+
+    // db.collection("users").findOne(
+    //   { _id: new objectId("5fe70cb1312c8605c800cc70") },
+    //   (error, user) => {
+    //     if (error) {
+    //       return console.log("Unable to fetch");
+    //     }
+    //     console.log(user);
+    //   }
+    // );
+
+    // db.collection("users")
+    //   .find({ age: 20 })
+    //   .toArray((error, users) => {
+    //     console.log(users);
+    //   });
+
+    // db.collection("users")
+    //   .find({ age: 20 })
+    //   .count((error, users) => {
+    //     console.log(users);
+    //   });
+
+    db.collection("tasks").findOne(
+      {
+        _id: new objectId("5fe7fd22411b1714ffd2a265"),
+      },
+      (error, tasks) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(tasks);
+        }
+      }
+    );
+
+    db.collection("tasks")
+      .find({ completed: false })
+      .toArray((error, tasks) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(tasks);
+        }
+      });
   }
 );
