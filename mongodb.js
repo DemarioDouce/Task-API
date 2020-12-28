@@ -130,13 +130,36 @@ mongoClient.connect(
     //     console.log(error);
     //   });
 
+    // db.collection("tasks")
+    //   .updateMany(
+    //     {
+    //       completed: true,
+    //     },
+    //     { $set: { completed: false } }
+    //   )
+    //   .then((result) => {
+    //     console.log(result);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    //delete
+    // db.collection("users")
+    //   .deleteMany({
+    //     age: 26,
+    //   })
+    //   .then((rseult) => {
+    //     console.log(rseult);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     db.collection("tasks")
-      .updateMany(
-        {
-          completed: true,
-        },
-        { $set: { completed: false } }
-      )
+      .deleteOne({
+        _id: objectId("5fe7fd22411b1714ffd2a263"),
+      })
       .then((result) => {
         console.log(result);
       })
