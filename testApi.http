@@ -1,11 +1,23 @@
-POST http://localhost:3000/users
-content-type: application/json
+//user
+GET http://localhost:3000/users/5feb813f382d4a240ae68a40
 
-{
-    "name": "Demario",
-    "email": "demario@gmail.com",
-    "password": "12345678",
-    "age":22
-}
+# POST http://localhost:3000/users
+# content-type: application/json
+
+# {
+#     "name": "Demario",
+#     "email": "demario@gmail.com",
+#     "password": "12345678",
+#     "age":22
+# }
 
 ###
+
+//task
+# POST http://localhost:3000/tasks
+# content-type: application/json
+
+# {
+#     "description": "Finish this courses",
+#     "completed": false
+# }
