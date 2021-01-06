@@ -74,6 +74,20 @@ app.patch("/users/:id", async (req, res) => {
   }
 });
 
+app.delete("/users/:id", async (req, res) => {
+  let userId = req.params.id;
+  try {
+    let findUser = await user.findByIdAndDelete(userId);
+    if (!findUser) {
+      res.status(400).send();
+    } else {
+      res.send(findUser);
+    }
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
 //tasks
 app.get("/tasks", async (req, res) => {
   try {
@@ -127,6 +141,20 @@ app.patch("/tasks/:id", async (req, res) => {
       runValidators: true,
     });
 
+    if (!findTask) {
+      res.status(400).send();
+    } else {
+      res.send(findTask);
+    }
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+app.delete("/tasks/:id", async (req, res) => {
+  let taskId = req.params.id;
+  try {
+    let findTask = await task.findByIdAndDelete(taskId);
     if (!findTask) {
       res.status(400).send();
     } else {
