@@ -1,25 +1,25 @@
-# //user
-GET http://localhost:3000/users/5feb813f382d4a240ae68a40
+# # //user
+# GET http://localhost:3000/users/5feb813f382d4a240ae68a40
 
-POST http://localhost:3000/users
-content-type: application/json
+# PATCH  http://localhost:3000/users/5feb813f382d4a240ae68a40
+# content-type: application/json
 
-{
-    "name": "Demario",
-    "email": "demario@gmail.com",
-    "password": "123458",
-    "age":22
-}
+# {
+#     "name": "Demario Douce",
+#     "email": "demario@gmail.com",
+#     "password": "12345898",
+#     "age":23
+# }
 
 ###
 
 # //task
 # GET http://localhost:3000/tasks/5fea53c920080716717e6c29
 
-# # POST http://localhost:3000/tasks
-# # content-type: application/json
+PATCH  http://localhost:3000/tasks/5ff51b3f1eec06217ad94cb0
+content-type: application/json
 
-# # {
-# #     "description": "Finish this courses",
-# #     "completed": false
-# # }
+{
+    "description": "Cook Food",
+    "completed": true
+}
