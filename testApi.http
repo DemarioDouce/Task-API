@@ -1,14 +1,12 @@
 # # //user
 # GET http://localhost:3000/users/5ff6287847af0d3359c05317
 
-POST   http://localhost:3000/users
+POST   http://localhost:3000/users/login
 content-type: application/json
 
 {
-    "name": "Junior Jackson",
-    "email": "jj@gmail.com",
-    "password": "12345898",
-    "age":25
+    "email": "ddouce@gmail.com",
+    "password": "12345898"
 }
 
 ###

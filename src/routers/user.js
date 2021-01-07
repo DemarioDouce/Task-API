@@ -38,6 +38,15 @@ router.post("/users", async (req, res) => {
   }
 });
 
+router.post("/users/login", async (req, res) => {
+  try {
+    let userLogin = await user.findByCre(req.body.email, req.body.password);
+    res.send(userLogin);
+  } catch (e) {
+    res.status(400).send();
+  }
+});
+
 router.patch("/users/:id", async (req, res) => {
   let userId = req.params.id;
   let updates = Object.keys(req.body);
