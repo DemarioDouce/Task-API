@@ -29,10 +29,11 @@ router.get("/users/:id", async (req, res) => {
 
 router.post("/users", async (req, res) => {
   let newUser = new user(req.body);
+  let token = await newUser.genAuthToken();
 
   try {
     await newUser.save();
-    res.status(201).send(newUser);
+    res.status(201).send({ newUser, token });
   } catch (e) {
     res.status(400).send(e);
   }
@@ -41,7 +42,8 @@ router.post("/users", async (req, res) => {
 router.post("/users/login", async (req, res) => {
   try {
     let userLogin = await user.findByCre(req.body.email, req.body.password);
-    res.send(userLogin);
+    let token = await userLogin.genAuthToken();
+    res.send({ userLogin, token });
   } catch (e) {
     res.status(400).send();
   }
