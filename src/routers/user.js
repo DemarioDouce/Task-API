@@ -45,6 +45,28 @@ router.post("/users/login", async (req, res) => {
   }
 });
 
+router.post("/users/logout", auth, async (req, res) => {
+  try {
+    req.tokenUser.tokens = req.tokenUser.tokens.filter((token) => {
+      return token.token !== req.token;
+    });
+    await req.tokenUser.save();
+    res.send();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+router.post("/users/logout/all", auth, async (req, res) => {
+  try {
+    req.tokenUser.tokens = [];
+    await req.tokenUser.save();
+    res.send();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
 router.patch("/users/:id", async (req, res) => {
   let userId = req.params.id;
   let updates = Object.keys(req.body);
