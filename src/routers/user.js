@@ -2,14 +2,10 @@ const express = require("express");
 const user = require("../models/user");
 require("../db/mongoose");
 const router = new express.Router();
+const auth = require("../middleware/auth");
 
-router.get("/users", async (req, res) => {
-  try {
-    const findUsers = await user.find({});
-    res.send(findUsers);
-  } catch (e) {
-    res.status(500).send();
-  }
+router.get("/users/me", auth, async (req, res) => {
+  res.send(req.tokenUser);
 });
 
 router.get("/users/:id", async (req, res) => {
