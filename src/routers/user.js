@@ -8,21 +8,6 @@ router.get("/users/me", auth, async (req, res) => {
   res.send(req.tokenUser);
 });
 
-router.get("/users/:id", async (req, res) => {
-  let userId = req.params.id;
-
-  try {
-    const findUserById = await user.findById(userId);
-    if (!findUserById) {
-      res.sendStatus(404).send();
-    } else {
-      res.send(findUserById);
-    }
-  } catch (e) {
-    res.status(500).send(e);
-  }
-});
-
 router.post("/users", async (req, res) => {
   let newUser = new user(req.body);
   let token = await newUser.genAuthToken();
@@ -67,8 +52,7 @@ router.post("/users/logout/all", auth, async (req, res) => {
   }
 });
 
-router.patch("/users/:id", async (req, res) => {
-  let userId = req.params.id;
+router.patch("/users/me/update", auth, async (req, res) => {
   let updates = Object.keys(req.body);
   let allowedUpdate = ["name", "email", "password", "age"];
   let isValidOperation = updates.every((update) => {
@@ -80,38 +64,22 @@ router.patch("/users/:id", async (req, res) => {
   }
 
   try {
-    // const findUser = await user.findByIdAndUpdate(userId, req.body, {
-    //   new: true,
-    //   runValidators: true,
-    // });
-
-    let findUser = await user.findById(userId);
-
     updates.forEach((update) => {
-      findUser[update] = req.body[update];
+      req.tokenUser[update] = req.body[update];
     });
 
-    await findUser.save();
+    await req.tokenUser.save();
 
-    if (!findUser) {
-      res.status(400).send();
-    } else {
-      res.send(findUser);
-    }
+    res.send(req.tokenUser);
   } catch (e) {
     res.status(400).send(e);
   }
 });
 
-router.delete("/users/:id", async (req, res) => {
-  let userId = req.params.id;
+router.delete("/users/me/delete", auth, async (req, res) => {
   try {
-    let findUser = await user.findByIdAndDelete(userId);
-    if (!findUser) {
-      res.status(400).send();
-    } else {
-      res.send(findUser);
-    }
+    await req.tokenUser.remove();
+    res.send(req.tokenUser);
   } catch (e) {
     res.status(400).send(e);
   }
