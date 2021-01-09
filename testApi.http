@@ -1,3 +1,9 @@
 
-POST http://localhost:3000/users/logout/all
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmY2YjM5ZWFjZmE4NzYxMDA2YjAwZDkiLCJpYXQiOjE2MTAxNDg5NDJ9.lIjz7w2hW5XLECXufvwRf2m2etyr_kJ_lg9VX-mNaXE
+POST http://localhost:3000/users/login
+content-type: application/json
+
+{
+    "email": "dlewis@gmail.com",
+    "password": "12345898"
+
+}
