@@ -3,6 +3,7 @@ const user = require("../models/user");
 require("../db/mongoose");
 const router = new express.Router();
 const auth = require("../middleware/auth");
+const multer = require("multer");
 
 router.get("/user/me", auth, async (req, res) => {
   res.send(req.tokenUser);
@@ -83,6 +84,15 @@ router.delete("/user/me/delete", auth, async (req, res) => {
   } catch (e) {
     res.status(400).send(e);
   }
+});
+
+//upload image
+const avatars = multer({
+  dest: "avatars",
+});
+
+router.post("/user/avatar/upload", avatars.single("avatars"), (req, res) => {
+  res.send();
 });
 
 module.exports = router;
