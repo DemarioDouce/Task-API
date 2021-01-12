@@ -1,5 +1,6 @@
 const express = require("express");
 const task = require("../models/task");
+const auth = require("../middleware/auth");
 require("../db/mongoose");
 const router = new express.Router();
 
@@ -27,8 +28,9 @@ router.get("/tasks/:id", async (req, res) => {
   }
 });
 
-router.post("/tasks", async (req, res) => {
-  let newTask = new task(req.body);
+router.post("/new/task", auth, async (req, res) => {
+  //let newTask = new task(req.body);
+  let newTask = new task({ ...req.body, user: req.tokenUser._id });
   try {
     await newTask.save();
     res.status(201).send(newTask);

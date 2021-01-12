@@ -4,11 +4,11 @@ require("../db/mongoose");
 const router = new express.Router();
 const auth = require("../middleware/auth");
 
-router.get("/users/me", auth, async (req, res) => {
+router.get("/user/me", auth, async (req, res) => {
   res.send(req.tokenUser);
 });
 
-router.post("/users", async (req, res) => {
+router.post("/new/user", async (req, res) => {
   let newUser = new user(req.body);
   let token = await newUser.genAuthToken();
 
@@ -20,7 +20,7 @@ router.post("/users", async (req, res) => {
   }
 });
 
-router.post("/users/login", async (req, res) => {
+router.post("/user/login", async (req, res) => {
   try {
     let userLogin = await user.findByCre(req.body.email, req.body.password);
     let token = await userLogin.genAuthToken();
@@ -30,7 +30,7 @@ router.post("/users/login", async (req, res) => {
   }
 });
 
-router.post("/users/logout", auth, async (req, res) => {
+router.post("/user/logout", auth, async (req, res) => {
   try {
     req.tokenUser.tokens = req.tokenUser.tokens.filter((token) => {
       return token.token !== req.token;
@@ -42,7 +42,7 @@ router.post("/users/logout", auth, async (req, res) => {
   }
 });
 
-router.post("/users/logout/all", auth, async (req, res) => {
+router.post("/user/logout/all", auth, async (req, res) => {
   try {
     req.tokenUser.tokens = [];
     await req.tokenUser.save();
@@ -52,7 +52,7 @@ router.post("/users/logout/all", auth, async (req, res) => {
   }
 });
 
-router.patch("/users/me/update", auth, async (req, res) => {
+router.patch("/user/me/update", auth, async (req, res) => {
   let updates = Object.keys(req.body);
   let allowedUpdate = ["name", "email", "password", "age"];
   let isValidOperation = updates.every((update) => {
@@ -76,7 +76,7 @@ router.patch("/users/me/update", auth, async (req, res) => {
   }
 });
 
-router.delete("/users/me/delete", auth, async (req, res) => {
+router.delete("/user/me/delete", auth, async (req, res) => {
   try {
     await req.tokenUser.remove();
     res.send(req.tokenUser);

@@ -1,9 +1,21 @@
 
-POST   http://localhost:3000/users/me
+# POST   http://localhost:3000/new/user
+# content-type: application/json
+
+# {
+#     "name":"Demario Douce",
+#     "email": "dd@gmail.com",
+#     "password": "12345898",
+#     "age":22
+
+# }
+
+POST http://localhost:3000/new/task
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZiZTcyZmRjMDA4YjE0ZTQ0YjJjZDMiLCJpYXQiOjE2MTAzNDQyMzl9.exdoCkmDLIPWX14EbFGVsFHCxWyhXJtqVCEbRAjE9Uo
 content-type: application/json
 
 {
-    "email": "dlewis@gmail.com",
-    "password": "12345898"
+    "description":"Apply for interships",
+    "completed": true
 
 }
