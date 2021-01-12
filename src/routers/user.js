@@ -100,8 +100,15 @@ const avatars = multer({
   },
 });
 
-router.post("/user/avatar/upload", avatars.single("avatars"), (req, res) => {
-  res.send();
-});
+router.post(
+  "/user/avatar/upload",
+  avatars.single("avatars"),
+  (req, res) => {
+    res.send();
+  },
+  (error, req, res, next) => {
+    res.status(400).send(error.message);
+  }
+);
 
 module.exports = router;
