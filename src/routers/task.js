@@ -6,11 +6,18 @@ const router = new express.Router();
 
 // /task/all?completed=true
 // /task/all?limit=10&skip=10
+// /task/all?sortBy=createdAt_asc
 router.get("/task/all", auth, async (req, res) => {
   let match = {};
+  let sort = {};
 
   if (req.query.completed) {
     match.completed = req.query.completed === "true";
+  }
+
+  if (req.query.sortBy) {
+    let parts = req.query.sortBy.split("_");
+    sort[parts[0]] = parts[1] === "desc" ? -1 : 1;
   }
   try {
     await req.tokenUser
@@ -20,6 +27,7 @@ router.get("/task/all", auth, async (req, res) => {
         options: {
           limit: parseInt(req.query.limit),
           skip: parseInt(req.query.skip),
+          sort,
         },
       })
       .execPopulate();
