@@ -5,6 +5,7 @@ require("../db/mongoose");
 const router = new express.Router();
 
 // /task/all?completed=true
+// /task/all?limit=10&skip=10
 router.get("/task/all", auth, async (req, res) => {
   let match = {};
 
@@ -16,6 +17,10 @@ router.get("/task/all", auth, async (req, res) => {
       .populate({
         path: "userTask",
         match,
+        options: {
+          limit: parseInt(req.query.limit),
+          skip: parseInt(req.query.skip),
+        },
       })
       .execPopulate();
     res.send(req.tokenUser.userTask);

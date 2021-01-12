@@ -34,5 +34,5 @@
 # DELETE   http://localhost:3000/user/me/delete
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZjZWRhOTlhOGYxNjI4NTA5OGYyOTQiLCJpYXQiOjE2MTA0MTE0MzN9.TNY0aYz5UL--WNct5zW1xA30LGEjODlkK3vCa97nnYI
 
-GET   http://localhost:3000/task/all?completed=true
+GET   http://localhost:3000/task/all?limit=1&skip=3
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZkMWUyZjUxNThkNzM2NDk4M2RmY2QiLCJpYXQiOjE2MTA0MjM4NTV9.zWRsyf-75PNDC50NUhVEY7doDFMI4jAUaGiiDwRxo9E
