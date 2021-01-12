@@ -3,19 +3,29 @@
 # content-type: application/json
 
 # {
-#     "name":"Demario Douce",
-#     "email": "dd@gmail.com",
+#     "name":"Demarly Lewis",
+#     "email": "dl@gmail.com",
 #     "password": "12345898",
-#     "age":22
+#     "age":23
 
 # }
 
-POST http://localhost:3000/new/task
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZiZTcyZmRjMDA4YjE0ZTQ0YjJjZDMiLCJpYXQiOjE2MTAzNDQyMzl9.exdoCkmDLIPWX14EbFGVsFHCxWyhXJtqVCEbRAjE9Uo
-content-type: application/json
+# POST http://localhost:3000/new/task
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZjZWRhOTlhOGYxNjI4NTA5OGYyOTQiLCJpYXQiOjE2MTA0MTE0MzN9.TNY0aYz5UL--WNct5zW1xA30LGEjODlkK3vCa97nnYI
+# content-type: application/json
 
-{
-    "description":"Apply for interships",
-    "completed": true
+# {
+#     "description":"Buy shoe",
+#     "completed": false
 
-}
+# }
+
+DELETE   http://localhost:3000/delete/task/5ffcedea9a8f16285098f297
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZjZWRhOTlhOGYxNjI4NTA5OGYyOTQiLCJpYXQiOjE2MTA0MTE0MzN9.TNY0aYz5UL--WNct5zW1xA30LGEjODlkK3vCa97nnYI
+# content-type: application/json
+
+# {
+#     "description":"Buy shoe",
+#     "completed": true
+
+# }

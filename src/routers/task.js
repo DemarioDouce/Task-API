@@ -4,20 +4,21 @@ const auth = require("../middleware/auth");
 require("../db/mongoose");
 const router = new express.Router();
 
-router.get("/tasks", async (req, res) => {
+router.get("/task/all", auth, async (req, res) => {
   try {
-    let findTasks = await task.find({});
+    let findTasks = await task.find({ user: req.tokenUser._id });
     res.send(findTasks);
   } catch (e) {
     res.status(500).send();
   }
 });
 
-router.get("/tasks/:id", async (req, res) => {
-  let taskId = req.params.id;
+router.get("/task/:id", auth, async (req, res) => {
+  let _id = req.params.id;
 
   try {
-    const findTaskById = await task.findById(taskId);
+    //let findTaskById = await task.findById(taskId);
+    let findTaskById = await task.findOne({ _id, user: req.tokenUser._id });
     if (!findTaskById) {
       res.sendStatus(404).send();
     } else {
@@ -39,7 +40,7 @@ router.post("/new/task", auth, async (req, res) => {
   }
 });
 
-router.patch("/tasks/:id", async (req, res) => {
+router.patch("/update/task/:id", auth, async (req, res) => {
   let taskId = req.params.id;
   let updates = Object.keys(req.body);
   let allowedUpdate = ["description", "completed"];
@@ -52,17 +53,15 @@ router.patch("/tasks/:id", async (req, res) => {
   }
 
   try {
-    let findTask = await user.findById(taskId);
-
-    updates.forEach((update) => {
-      findTask[update] = req.body[update];
-    });
-
-    await findTask.save();
+    let findTask = await task.findOne({ _id: taskId, user: req.tokenUser._id });
 
     if (!findTask) {
       res.status(400).send();
     } else {
+      updates.forEach((update) => {
+        findTask[update] = req.body[update];
+      });
+      await findTask.save();
       res.send(findTask);
     }
   } catch (e) {
@@ -70,10 +69,13 @@ router.patch("/tasks/:id", async (req, res) => {
   }
 });
 
-router.delete("/tasks/:id", async (req, res) => {
+router.delete("/delete/task/:id", auth, async (req, res) => {
   let taskId = req.params.id;
   try {
-    let findTask = await task.findByIdAndDelete(taskId);
+    let findTask = await task.findOneAndDelete({
+      _id: taskId,
+      user: req.tokenUser._id,
+    });
     if (!findTask) {
       res.status(400).send();
     } else {
