@@ -4,10 +4,21 @@ const auth = require("../middleware/auth");
 require("../db/mongoose");
 const router = new express.Router();
 
+// /task/all?completed=true
 router.get("/task/all", auth, async (req, res) => {
+  let match = {};
+
+  if (req.query.completed) {
+    match.completed = req.query.completed === "true";
+  }
   try {
-    let findTasks = await task.find({ user: req.tokenUser._id });
-    res.send(findTasks);
+    await req.tokenUser
+      .populate({
+        path: "userTask",
+        match,
+      })
+      .execPopulate();
+    res.send(req.tokenUser.userTask);
   } catch (e) {
     res.status(500).send();
   }
