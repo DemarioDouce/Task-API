@@ -20,8 +20,8 @@
 
 # }
 
-DELETE   http://localhost:3000/delete/task/5ffcedea9a8f16285098f297
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZjZWRhOTlhOGYxNjI4NTA5OGYyOTQiLCJpYXQiOjE2MTA0MTE0MzN9.TNY0aYz5UL--WNct5zW1xA30LGEjODlkK3vCa97nnYI
+# DELETE   http://localhost:3000/delete/task/5ffcedea9a8f16285098f297
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZjZWRhOTlhOGYxNjI4NTA5OGYyOTQiLCJpYXQiOjE2MTA0MTE0MzN9.TNY0aYz5UL--WNct5zW1xA30LGEjODlkK3vCa97nnYI
 # content-type: application/json
 
 # {
@@ -29,3 +29,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZjZWRhO
 #     "completed": true
 
 # }
+
+
+DELETE   http://localhost:3000/user/me/delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZjZWRhOTlhOGYxNjI4NTA5OGYyOTQiLCJpYXQiOjE2MTA0MTE0MzN9.TNY0aYz5UL--WNct5zW1xA30LGEjODlkK3vCa97nnYI
+
+
