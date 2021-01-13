@@ -127,4 +127,19 @@ router.delete(
   }
 );
 
+router.get("/user/:id/avatar", async (req, res) => {
+  try {
+    let userId = await user.findById(req.params.id);
+
+    if (!userId || !userId.avatar) {
+      throw new Error();
+    } else {
+      res.set("Content-Type", "image/jpg");
+      res.send(userId.avatar);
+    }
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
 module.exports = router;
