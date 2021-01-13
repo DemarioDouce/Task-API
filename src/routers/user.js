@@ -4,6 +4,7 @@ require("../db/mongoose");
 const router = new express.Router();
 const auth = require("../middleware/auth");
 const multer = require("multer");
+const sharp = require("sharp");
 
 router.get("/user/me", auth, async (req, res) => {
   res.send(req.tokenUser);
@@ -104,7 +105,11 @@ router.post(
   auth,
   avatars.single("avatars"),
   async (req, res) => {
-    req.tokenUser.avatar = req.file.buffer;
+    let buffer = await sharp(req.file.buffer)
+      .resize({ width: 250, height: 250 })
+      .png()
+      .toBuffer();
+    req.tokenUser.avatar = buffer;
     await req.tokenUser.save();
     res.send();
   },
@@ -134,7 +139,7 @@ router.get("/user/:id/avatar", async (req, res) => {
     if (!userId || !userId.avatar) {
       throw new Error();
     } else {
-      res.set("Content-Type", "image/jpg");
+      res.set("Content-Type", "image/png");
       res.send(userId.avatar);
     }
   } catch (e) {
