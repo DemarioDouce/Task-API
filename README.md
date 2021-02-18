@@ -1,4 +1,5 @@
-# TaskApp
-## Learning project
+# Task
 ---
-Simple task app using MongoDB.
+## Screenshot
+![Mockup image.](/Mockups/MockupHomepage.png)
+---
