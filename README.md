@@ -1,5 +1,5 @@
 # Task
 ---
 ## Screenshot
-![Mockup image.](/Mockups/MockupHomepage.png)
+![Mockup image.](/Mockups/MockupTask.png)
 ---
