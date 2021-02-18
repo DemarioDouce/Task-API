@@ -1,7 +1,7 @@
 //npm module
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/TaskAppAPI", {
+mongoose.connect("mongodb://127.0.0.1:27017/TaskAPI", {
   useNewUrlParser: true,
   useCreateIndex: true,
 });
